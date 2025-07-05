@@ -1,7 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	fmt.Println("Main server function")
+	var router *gin.Engine = gin.Default()
+
+	router.GET("/ping", serverCheck)
+	router.Run(":8000")
+
+}
+
+func serverCheck(context *gin.Context) {
+	context.IndentedJSON(http.StatusOK, "pong")
 }
