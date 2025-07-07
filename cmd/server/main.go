@@ -1,19 +1,23 @@
 package main
 
 import (
-	"net/http"
+	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mateeusferro/fineval/internal/config"
+	"github.com/mateeusferro/fineval/internal/delivery"
 )
 
 func main() {
 	var router *gin.Engine = gin.Default()
+	port := config.EnvVariable("PORT")
 
-	router.GET("/ping", serverCheck)
-	router.Run(":8000")
+	delivery.Routes(router)
 
-}
+	err := router.Run(":" + port)
 
-func serverCheck(context *gin.Context) {
-	context.IndentedJSON(http.StatusOK, "pong")
+	if err != nil {
+		log.Fatalf("Error while starting the server: %v", err)
+	}
+
 }
