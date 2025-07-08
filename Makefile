@@ -6,3 +6,6 @@ build:
 
 run:
 	go run ${SRC_FOLDER}/main.go
+
+test:
+	go test ./... -v
