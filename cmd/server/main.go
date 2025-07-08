@@ -9,11 +9,11 @@ import (
 )
 
 func main() {
+	config.LoadEnv()
 	var router *gin.Engine = gin.Default()
 	port := config.EnvVariable("PORT")
 
 	delivery.Routes(router)
-
 	err := router.Run(":" + port)
 
 	if err != nil {
