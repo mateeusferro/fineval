@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - PORT=8000
+      - ENV=DEV
+      - AUDITLY_HOST=http://127.0.0.1:8080
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
